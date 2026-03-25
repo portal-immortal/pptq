@@ -1,6 +1,9 @@
-import { defineConfig } from "astro/config";
+import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: "https://portal-immortal.github.io",
-  base: "/pptq"
+  integrations: [tailwind()],
+  site: 'https://portal-immortal.github.io',
+  base: '/',
+  output: 'static',
 });

@@ -21,7 +21,7 @@ Kp. Cipayung, Desa Sukaharja, Kec. Ciomas, Kab. Bogor, Jawa Barat 16610
 ```bash
 npm install
 npm run dev
-# Buka: http://localhost:4321/pesantren-website/
+# Buka: http://localhost:4321/
 ```
 
 ## 🌐 Deploy ke GitHub Pages
@@ -29,7 +29,7 @@ npm run dev
 1. Edit `astro.config.mjs` — ganti `YOUR_USERNAME` dengan username GitHub Anda
 2. Push ke branch `main`
 3. Settings → Pages → Source: **GitHub Actions**
-4. Website live di: `https://YOUR_USERNAME.github.io/pesantren-website/`
+4. Website live di: `https://YOUR_USERNAME.github.io/`
 
 ---
 
@@ -66,7 +66,7 @@ npm run dev
 ---
 title: "Judul Berita"
 date: 2025-04-01
-image: "/pesantren-website/images/latest-news/foto.jpg"
+image: "/images/latest-news/foto.jpg"
 excerpt: "Ringkasan berita..."
 author: "Admin PPTQ"
 tags: ["tag"]

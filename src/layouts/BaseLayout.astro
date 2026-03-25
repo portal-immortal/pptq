@@ -12,11 +12,11 @@ interface Props {
 const {
   title,
   description = "Pondok Pesantren Tahfidzil Qur'an (PPTQ) Nurul Iman Ciomas Bogor — Lembaga tahfidz Al-Qur'an santriwati, mencetak generasi santriwati Qur'ani yang berakhlak mulia.",
-  ogImage = '/pesantren-website/images/students-activities/pesantren-kegiatan-santri-01.jpeg',
+  ogImage = '/images/students-activities/pesantren-kegiatan-santri-01.jpeg',
   ogType  = 'website',
 } = Astro.props;
 
-const base        = '/pesantren-website';
+const base        = '';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com');
 const fullTitle   = `${title} — PPTQ Nurul Iman`;
 ---

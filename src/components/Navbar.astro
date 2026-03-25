@@ -1,5 +1,5 @@
 ---
-const base = '/pesantren-website';
+const base = '';
 const navLinks = [
   { href: `${base}/`,                    label: 'Beranda' },
   { href: `${base}/profil`,             label: 'Profil' },
@@ -140,10 +140,10 @@ const navLinks = [
   const path = window.location.pathname.replace(/\/$/, '');
   document.querySelectorAll('.nav-link').forEach(link => {
     const href = ((link as HTMLAnchorElement).getAttribute('href') || '').replace(/\/$/, '');
-    const isHome   = href === '/pesantren-website';
+    const isHome   = href === '';
     const isActive = isHome
-      ? (path === '/pesantren-website' || path === '')
-      : href !== '/pesantren-website' && path.startsWith(href);
+      ? (path === '' || path === '')
+      : href !== '' && path.startsWith(href);
     if (isActive) {
       link.classList.add('bg-forest-900', 'text-white', '!text-white');
       link.classList.remove('text-forest-800', 'hover:bg-forest-50');

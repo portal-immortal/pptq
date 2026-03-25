@@ -1,7 +1,7 @@
 ---
 title: "Donasi Ramadhan 1447H — Bersama Ringankan Beban Sesama"
 date: 2025-03-05
-image: "/pesantren-website/images/latest-news/donasi-ramadhan.jpeg"
+image: "/images/latest-news/donasi-ramadhan.jpeg"
 excerpt: "Program Donasi Ramadhan 1447H PPTQ Nurul Iman kembali dibuka. Mari bersama-sama berbagi kebaikan di bulan suci ini untuk saudara-saudara kita yang membutuhkan."
 author: "Admin Pesantren"
 tags: ["donasi", "ramadhan", "sosial"]
