@@ -66,7 +66,7 @@ npm run dev
 ---
 title: "Judul Berita"
 date: 2025-04-01
-image: "/images/latest-news/foto.jpg"
+image: "/pptq/images/latest-news/foto.jpg"
 excerpt: "Ringkasan berita..."
 author: "Admin PPTQ"
 tags: ["tag"]

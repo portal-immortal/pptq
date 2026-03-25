@@ -1,7 +1,7 @@
 ---
 title: "Festival Ramadhan & Nuzulul Qur'an 1447H — Merayakan Turunnya Kalam Ilahi"
 date: 2025-03-17
-image: "/images/latest-news/festival-ramadhan.jpeg"
+image: "/pptq/images/latest-news/festival-ramadhan.jpeg"
 excerpt: "PPTQ Nurul Iman menggelar Festival Ramadhan dan Peringatan Nuzulul Qur'an 1447H pada malam 17 Ramadhan. Acara meriah ini diisi dengan lomba, penampilan santriwati, dan tausiyah dari ulama tamu."
 author: "Admin Pesantren"
 tags: ["festival", "nuzulul quran", "ramadhan", "event"]
