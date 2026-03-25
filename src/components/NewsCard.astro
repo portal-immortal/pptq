@@ -1,0 +1,56 @@
+---
+interface Props {
+  title:   string;
+  date:    Date | string;
+  image:   string;
+  excerpt: string;
+  slug:    string;
+  tags?:   string[];
+}
+const { title, date, image, excerpt, slug, tags = [] } = Astro.props;
+const base = '/pesantren-website';
+const fmt = new Date(date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<article class="group bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover card-lift border border-parchment-300 flex flex-col h-full">
+  <!-- Image -->
+  <a href={`${base}/berita/${slug}`} class="block img-zoom aspect-[16/10] flex-shrink-0" tabindex="-1" aria-hidden="true">
+    <img src={image} alt={`Foto: ${title}`} class="w-full h-full object-cover" loading="lazy" decoding="async"
+      onerror="this.src='https://placehold.co/600x375/0d4429/ffffff?text=PPTQ+Nurul+Iman'" />
+  </a>
+
+  <div class="p-5 flex flex-col flex-1">
+    <!-- Tags -->
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-1.5 mb-3">
+        {tags.slice(0, 2).map(tag => (
+          <span class="chip chip-forest text-2xs">{tag}</span>
+        ))}
+      </div>
+    )}
+
+    <!-- Title -->
+    <h3 class="font-display text-base sm:text-lg text-ink-900 group-hover:text-forest-800 transition-colors leading-snug mb-2 line-clamp-2 flex-shrink-0">
+      <a href={`${base}/berita/${slug}`} class="focus-visible:underline">{title}</a>
+    </h3>
+
+    <!-- Date -->
+    <time datetime={new Date(date).toISOString().split('T')[0]} class="text-2xs text-ink-800/40 font-medium uppercase tracking-wide mb-3 flex items-center gap-1.5">
+      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+      </svg>
+      {fmt}
+    </time>
+
+    <p class="text-sm text-ink-800/60 leading-relaxed line-clamp-3 mb-4 flex-1">{excerpt}</p>
+
+    <a href={`${base}/berita/${slug}`}
+      class="mt-auto inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-forest-700 hover:text-forest-900 transition-colors group/link"
+      aria-label={`Baca: ${title}`}>
+      Baca Selengkapnya
+      <svg class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+      </svg>
+    </a>
+  </div>
+</article>

@@ -1,0 +1,51 @@
+---
+interface TimelineItem {
+  year:        string;
+  title:       string;
+  description: string;
+  highlight?:  boolean;
+}
+
+interface Props {
+  items: TimelineItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="relative">
+  <!-- Vertical line -->
+  <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-forest-200 via-forest-400 to-forest-200 -translate-x-1/2"></div>
+
+  <div class="space-y-10">
+    {items.map((item, index) => (
+      <div class={`relative flex flex-col md:flex-row gap-6 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} animate-on-scroll`}>
+
+        <!-- Dot -->
+        <div class="absolute left-6 md:left-1/2 -translate-x-1/2 z-10">
+          <div class={`w-5 h-5 rounded-full border-4 ${item.highlight ? 'bg-amber-500 border-amber-300 shadow-lg shadow-amber-200' : 'bg-forest-600 border-forest-200'} transition-all`}></div>
+        </div>
+
+        <!-- Year badge (left half) -->
+        <div class={`hidden md:flex items-center ${index % 2 === 0 ? 'justify-end pr-12' : 'justify-start pl-12'} w-1/2`}>
+          <span class={`px-4 py-1.5 rounded-full text-sm font-bold shadow-sm ${item.highlight ? 'bg-amber-500 text-white' : 'bg-forest-700 text-white'}`}>
+            {item.year}
+          </span>
+        </div>
+
+        <!-- Card (right half) -->
+        <div class={`ml-14 md:ml-0 ${index % 2 === 0 ? 'md:pl-12 md:w-1/2' : 'md:pr-12 md:w-1/2'}`}>
+          <div class={`bg-white rounded-xl p-5 shadow-md border-l-4 ${item.highlight ? 'border-amber-500' : 'border-forest-700'} hover:shadow-lg transition-shadow`}>
+            <div class="flex items-center gap-2 mb-1 md:hidden">
+              <span class={`px-3 py-0.5 rounded-full text-xs font-bold ${item.highlight ? 'bg-amber-100 text-amber-700' : 'bg-forest-50 text-forest-700'}`}>
+                {item.year}
+              </span>
+            </div>
+            <h3 class="font-display font-semibold text-gray-800 mb-2">{item.title}</h3>
+            <p class="text-sm text-gray-500 leading-relaxed">{item.description}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

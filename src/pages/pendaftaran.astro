@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+
+const base = '/pesantren-website';
+
+const steps = [
+  { step: '01', title: 'Isi Formulir Online', desc: 'Lengkapi formulir pendaftaran dengan data diri calon santriwati dan orang tua/wali.' },
+  { step: '02', title: 'Kirim Berkas', desc: 'Upload dokumen yang diperlukan (ijazah, akta kelahiran, foto, dan lainnya).' },
+  { step: '03', title: 'Tes Seleksi', desc: 'Calon santriwati mengikuti tes baca Al-Qur\'an dan tes wawancara di pesantren.' },
+  { step: '04', title: 'Pengumuman', desc: 'Hasil seleksi diumumkan melalui website dan WhatsApp kepada orang tua.' },
+  { step: '05', title: 'Daftar Ulang', desc: 'Santri yang diterima melakukan daftar ulang dan pembayaran administrasi.' },
+  { step: '06', title: 'Masuk Pesantren', desc: 'Santri resmi menjadi bagian dari keluarga besar PPTQ dan memulai perjalanan.' },
+];
+
+const requirements = [
+  'Fotokopi Akta Kelahiran (2 lembar)',
+  'Fotokopi Kartu Keluarga (2 lembar)',
+  'Fotokopi Ijazah/SKHUN terakhir (2 lembar)',
+  'Pas foto 3×4 (6 lembar, background merah)',
+  'Surat keterangan sehat dari dokter',
+  'Surat izin orang tua/wali',
+  'Mengisi formulir pendaftaran online',
+];
+---
+
+<BaseLayout title="Pendaftaran Santriwati" description="Informasi dan formulir pendaftaran santriwati baru PPTQ Nurul Iman.">
+  <HeroSection
+    variant="page"
+    title="Pendaftaran Santri Baru"
+    subtitle="Daftarkan putri Anda dan jadikan beliau bagian dari generasi hafidzah PPTQ Nurul Iman yang kami banggakan. Pendaftaran dibuka setiap tahun."
+    bgImage={`${base}/images/students-activities/pesantren-kegiatan-santri-03.jpeg`}
+    minHeight="min-h-[60vh]"
+  />
+
+  <!-- Alur Pendaftaran -->
+  <section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 rounded-full border border-forest-100 mb-5">
+          Alur Pendaftaran
+        </span>
+        <h2 class="font-display font-bold text-4xl text-ink-900 mb-4">6 Langkah Mudah Mendaftar</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {steps.map((s, i) => (
+          <div class="relative bg-parchment-100 rounded-2xl p-7 reveal" style={`animation-delay: ${i * 0.1}s`}>
+            <span class="font-display font-bold text-5xl text-forest-100 absolute top-5 right-6">{s.step}</span>
+            <div class="relative z-10">
+              <div class="w-10 h-10 rounded-full bg-forest-700 text-white flex items-center justify-center font-bold mb-4 text-sm">
+                {s.step}
+              </div>
+              <h4 class="font-display font-semibold text-ink-900 mb-2">{s.title}</h4>
+              <p class="text-sm text-ink-800/55 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Form & Requirements -->
+  <section class="py-24 bg-parchment-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+        <!-- Requirements -->
+        <div class="lg:col-span-1 reveal">
+          <div class="bg-forest-800 rounded-2xl p-8 text-white sticky top-28">
+            <h3 class="font-display font-bold text-xl text-amber-400 mb-6">Dokumen yang Diperlukan</h3>
+            <ul class="space-y-3 mb-8">
+              {requirements.map(req => (
+                <li class="flex items-start gap-3 text-sm text-forest-200">
+                  <svg class="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  {req}
+                </li>
+              ))}
+            </ul>
+            <div class="border-t border-forest-700 pt-6">
+              <h4 class="font-semibold text-white mb-3">Informasi Biaya</h4>
+              <p class="text-sm text-forest-300 mb-2">Biaya pendaftaran: <span class="text-white font-bold">Rp 150.000</span></p>
+              <p class="text-xs text-forest-400">Biaya syahriyah dan lainnya akan diinformasikan setelah dinyatakan diterima.</p>
+            </div>
+            <div class="border-t border-forest-700 pt-6 mt-4">
+              <h4 class="font-semibold text-white mb-3">Hubungi Pengasuh</h4>
+              <div class="space-y-2">
+                <div>
+                  <p class="text-xs text-forest-400 mb-1">Santriwati — Umi Hj. Eli HS, SQ</p>
+                  <a href="https://wa.me/6285887516141" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm text-forest-200 hover:text-amber-400 transition-colors">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    0858-8751-6141
+                  </a>
+                </div>
+                <div>
+                  <p class="text-xs text-forest-400 mb-1">Santriwati — KH. Ubaidilah</p>
+                  <a href="https://wa.me/6281317030272" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm text-forest-200 hover:text-amber-400 transition-colors">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    0813-1703-0272
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="lg:col-span-2 reveal">
+          <div class="bg-white rounded-2xl shadow-lg p-8 lg:p-10">
+            <h3 class="font-display font-bold text-2xl text-ink-900 mb-2">Formulir Pendaftaran</h3>
+            <p class="text-ink-800/55 text-sm mb-8">Isi formulir di bawah dengan lengkap dan benar. Kami akan menghubungi Anda dalam 2-3 hari kerja.</p>
+
+            <form id="registration-form" class="space-y-6" novalidate>
+              <!-- Santri info -->
+              <div>
+                <h4 class="font-semibold text-forest-700 mb-4 text-sm uppercase tracking-wider">Data Calon Santri</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Nama Lengkap *</label>
+                    <input type="text" name="nama_santri" required placeholder="Nama lengkap calon santriwati"
+                      class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Tempat, Tanggal Lahir *</label>
+                    <input type="text" name="ttl" required placeholder="Contoh: Bandung, 01 Jan 2010"
+                      class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Program</label>
+                    <input type="text" value="Santriwati (Putri)" disabled
+                      class="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 text-sm cursor-not-allowed" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Pendidikan Terakhir *</label>
+                    <select name="pendidikan" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm">
+                      <option value="">Pilih pendidikan</option>
+                      <option>SD / MI</option>
+                      <option>SMP / MTs</option>
+                      <option>SMA / MA</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <label class="block text-sm font-medium text-gray-700 mb-1.5">Hafalan Saat Ini</label>
+                  <input type="text" name="hafalan" placeholder="Contoh: Juz 30, atau belum ada"
+                    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm" />
+                </div>
+              </div>
+
+              <!-- Orang tua -->
+              <div>
+                <h4 class="font-semibold text-forest-700 mb-4 text-sm uppercase tracking-wider">Data Orang Tua / Wali</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Nama Ayah *</label>
+                    <input type="text" name="nama_ayah" required placeholder="Nama ayah kandung"
+                      class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Nama Ibu *</label>
+                    <input type="text" name="nama_ibu" required placeholder="Nama ibu kandung"
+                      class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">No. WhatsApp *</label>
+                    <input type="tel" name="whatsapp" required placeholder="0858-8751-6141"
+                      class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
+                    <input type="email" name="email" placeholder="email@contoh.com"
+                      class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm" />
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <label class="block text-sm font-medium text-gray-700 mb-1.5">Alamat Lengkap *</label>
+                  <textarea name="alamat" required rows="3" placeholder="Jl. ..., RT/RW ..., Desa/Kel ..., Kec ..., Kab/Kota ..., Provinsi ..."
+                    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm resize-none"></textarea>
+                </div>
+              </div>
+
+              <!-- Pesan -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Pesan / Pertanyaan (opsional)</label>
+                <textarea name="pesan" rows="3" placeholder="Tuliskan pertanyaan atau informasi tambahan di sini..."
+                  class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-500 text-sm resize-none"></textarea>
+              </div>
+
+              <button type="submit"
+                class="w-full py-4 bg-forest-700 hover:bg-forest-600 text-white font-bold rounded-xl shadow-md transition-all hover:scale-[1.01] text-base"
+                id="submit-btn">
+                Kirim Formulir Pendaftaran
+              </button>
+
+              <!-- Success message -->
+              <div id="success-msg" class="hidden bg-forest-50 border border-forest-200 text-forest-800 rounded-xl p-4 text-sm text-center">
+                ✅ Formulir berhasil dikirim! Tim kami akan menghubungi Anda dalam 2-3 hari kerja. Jazakumullahu khairan.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  document.getElementById('registration-form')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Mengirim...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('success-msg').classList.remove('hidden');
+      btn.textContent = 'Formulir Terkirim ✓';
+      btn.classList.replace('bg-forest-700', 'bg-green-600');
+      this.reset();
+    }, 1200);
+  });
+</script>

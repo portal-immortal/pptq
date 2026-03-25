@@ -1,0 +1,248 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CTASection from '../components/CTASection.astro';
+
+const base = '/pesantren-website';
+
+const visi = "Menjadi lembaga pendidikan Al-Qur'an yang unggul, melahirkan generasi Qur'ani yang hafal, faham, dan mengamalkan Al-Qur'an serta berakhlakul karimah di tengah masyarakat.";
+
+const misi = [
+  "Menyelenggarakan program Tahfidz Al-Qur'an yang berkualitas dengan bimbingan ustadzah bersanad.",
+  "Membentuk karakter santriwati yang berakhlak mulia berdasarkan nilai-nilai Al-Qur'an dan As-Sunnah.",
+  "Mengintegrasikan pendidikan agama Islam secara komprehensif mencakup tahfidz, ilmu syar'i, dan adab.",
+  "Menciptakan lingkungan belajar yang kondusif, aman, nyaman, dan penuh keberkahan.",
+  "Menjalin hubungan yang harmonis antara pesantren, orang tua santriwati, dan masyarakat sekitar.",
+  "Mencetak lulusan yang siap berkontribusi nyata bagi agama, bangsa, dan masyarakat.",
+];
+
+const pengasuh = [
+  {
+    nama: 'Umi Hj. Eli HS, SQ',
+    jabatan: 'Ustadzah & Pengasuh Pondok Pesantren',
+    wa: '6285887516141',
+    inisial: 'E',
+  },
+  {
+    nama: 'KH. Ubaidilah',
+    jabatan: 'Pimpinan Pondok Pesantren',
+    wa: '6281317030272',
+    inisial: 'U',
+  },
+];
+
+const nilaiUtama = [
+  { icon: '🕌', title: 'Keimanan',    desc: 'Menanamkan aqidah yang kuat dan kokoh sebagai fondasi kehidupan' },
+  { icon: '📖', title: 'Ilmu',        desc: "Mengutamakan pencarian ilmu Al-Qur'an yang bermanfaat" },
+  { icon: '🤝', title: 'Akhlak',      desc: 'Membentuk karakter mulia sesuai tuntunan Rasulullah SAW' },
+  { icon: '🌱', title: 'Kemanfaatan', desc: 'Mendorong santriwati untuk bermanfaat bagi keluarga dan umat' },
+];
+
+const fasilitas = [
+  { icon: '🕌', nama: 'Masjid / Musholla',       desc: 'Pusat ibadah dan kegiatan tahfidz santriwati' },
+  { icon: '🏠', nama: 'Asrama Khusus Santriwati',     desc: 'Nyaman, aman, dan terjaga' },
+  { icon: '📚', nama: 'Ruang Belajar',            desc: 'Kelas kondusif untuk halaqah dan kajian' },
+  { icon: '🍽️', nama: 'Dapur & Ruang Makan',     desc: 'Makan bersama dengan menu bergizi' },
+  { icon: '⚽', nama: 'Area Olahraga',            desc: 'Lapangan untuk aktivitas fisik santriwati' },
+  { icon: '🌿', nama: 'Lingkungan Asri',          desc: 'Suasana alam Ciomas yang sejuk dan tenang' },
+];
+---
+
+<BaseLayout
+  title="Profil Pesantren"
+  description="Profil lengkap Pondok Pesantren Tahfidzil Qur'an (PPTQ) Nurul Iman Ciomas Bogor — visi misi, pengasuh, dan nilai-nilai pesantren."
+  ogImage={`${base}/images/students-activities/pesantren-kegiatan-santri-02.jpeg`}
+>
+  <HeroSection
+    variant="page"
+    title="Profil Pesantren"
+    subtitle="Mengenal lebih dekat Pondok Pesantren Tahfidzil Qur'an (PPTQ) Nurul Iman — lembaga tahfidz di kaki Gunung Salak, Ciomas, Bogor."
+    bgImage={`${base}/images/students-activities/pesantren-kegiatan-santri-03.jpeg`}
+    minHeight="min-h-[60vh]"
+  />
+
+  <!-- Intro strip -->
+  <div class="bg-forest-800 py-8">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <p class="font-arabic text-2xl text-amber-400 mb-2" lang="ar">وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا</p>
+      <p class="text-forest-300 text-sm">"Dan bacalah Al-Qur'an itu dengan perlahan-lahan." (QS. Al-Muzzammil: 4)</p>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="py-20 bg-white" aria-labelledby="about-heading">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+        <div class="lg:col-span-3 reveal-left">
+          <span class="inline-block px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 rounded-full border border-forest-100 mb-5">
+            Tentang Kami
+          </span>
+          <h2 id="about-heading" class="font-display font-bold text-4xl text-ink-900 mb-5 leading-tight">
+            PPTQ Nurul Iman<br/>
+            <span class="text-forest-700">Ciomas, Bogor</span>
+          </h2>
+          <p class="text-ink-800/70 leading-relaxed mb-4">
+            Pondok Pesantren Tahfidzil Qur'an (PPTQ) Nurul Iman berdiri sejak tahun <strong>2006</strong> di Kampung Cipayung, Desa Sukaharja, Kecamatan Ciomas, Kabupaten Bogor, Jawa Barat. Pesantren ini didirikan atas semangat untuk mencetak generasi penghafal Al-Qur'an yang berakhlak mulia.
+          </p>
+          <p class="text-ink-800/70 leading-relaxed mb-4">
+            Berlokasi di kawasan yang asri di kaki Gunung Salak, PPTQ Nurul Iman menyediakan suasana belajar yang tenang dan kondusif bagi para santri. Pesantren ini memiliki program khusus santriwati, dengan pengasuhan langsung dari <strong>Umi Hj. Eli HS, SQ</strong> selaku Ustadzah & Pengasuh bersama <strong>KH. Ubaidilah</strong> selaku Pimpinan Pondok Pesantren.
+          </p>
+          <p class="text-ink-800/70 leading-relaxed">
+            Dengan fokus pada pendidikan Tahfidz Al-Qur'an yang berkualitas, pesantren ini telah melahirkan banyak hafidzah yang tersebar di berbagai daerah, membawa cahaya Al-Qur'an ke tengah masyarakat.
+          </p>
+        </div>
+        <div class="lg:col-span-2 reveal-right">
+          <div class="bg-parchment-100 rounded-3xl p-8 border border-forest-100">
+            <h3 class="font-display font-semibold text-forest-800 mb-5 text-lg">Identitas Pesantren</h3>
+            <dl class="space-y-3">
+              {[
+                ['Nama',    "PPTQ Nurul Iman"],
+                ['Alamat',  'Kp. Cipayung, Desa Sukaharja, Kec. Ciomas, Kab. Bogor, Jawa Barat 16610'],
+                ['Berdiri', '2006'],
+                ['Fokus',   "Tahfidzil Qur'an Khusus Santriwati"],
+                ['Email',   'pptqnurulimancipayung@gmail.com'],
+                ['Instagram', '@pptqnuruliman_official'],
+              ].map(([label, value]) => (
+                <div class="flex gap-3 text-sm border-b border-forest-50 pb-3 last:border-0 last:pb-0">
+                  <dt class="font-semibold text-forest-700 w-24 flex-shrink-0">{label}</dt>
+                  <dd class="text-ink-800/70 break-all">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visi Misi -->
+  <section class="py-20 bg-parchment-100" aria-labelledby="vimis-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 rounded-full border border-forest-100 mb-4">
+          Arah & Tujuan
+        </span>
+        <h2 id="vimis-heading" class="font-display font-bold text-3xl text-ink-900">Visi & Misi</h2>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Visi -->
+        <div class="bg-forest-800 rounded-3xl p-10 text-white reveal-left">
+          <div class="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-bold text-2xl text-amber-400 mb-4">Visi</h3>
+          <p class="text-forest-100 leading-relaxed text-lg">{visi}</p>
+        </div>
+        <!-- Misi -->
+        <div class="bg-white rounded-3xl p-10 shadow-lg reveal-right">
+          <div class="w-14 h-14 rounded-2xl bg-forest-50 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-forest-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-bold text-2xl text-forest-800 mb-5">Misi</h3>
+          <ul class="space-y-3" role="list">
+            {misi.map((item, i) => (
+              <li class="flex items-start gap-3">
+                <span class="w-6 h-6 rounded-full bg-forest-100 text-forest-700 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5" aria-hidden="true">{i + 1}</span>
+                <span class="text-sm text-ink-800/70 leading-relaxed">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pengasuh -->
+  <section class="py-20 bg-white" aria-labelledby="pengasuh-heading">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 rounded-full border border-forest-100 mb-4">
+          Pimpinan
+        </span>
+        <h2 id="pengasuh-heading" class="font-display font-bold text-3xl text-ink-900">Pengasuh Pesantren</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {pengasuh.map((p, i) => (
+          <div class={`reveal ${i === 0 ? 'delay-100' : 'delay-200'}`}>
+            <div class="bg-gradient-to-br from-forest-800 to-forest-950 rounded-3xl p-8 text-white text-center card-hover">
+              <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-forest-500 to-forest-700 ring-4 ring-gold-500/40 flex items-center justify-center text-4xl font-display font-bold text-white mb-5 shadow-xl">
+                {p.inisial}
+              </div>
+              <h3 class="font-display font-bold text-xl text-white mb-1">{p.nama}</h3>
+              <p class="text-forest-300 text-sm mb-5">{p.jabatan}</p>
+              <a
+                href={`https://wa.me/${p.wa}`}
+                target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-green-500 hover:bg-green-400 text-white text-sm font-semibold rounded-full transition-all hover:scale-105"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Hubungi via WhatsApp
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Nilai Utama -->
+  <section class="py-20 bg-parchment-100" aria-labelledby="nilai-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 rounded-full border border-forest-100 mb-4">
+          Nilai Inti
+        </span>
+        <h2 id="nilai-heading" class="font-display font-bold text-3xl text-ink-900">Pilar Pendidikan PPTQ Nurul Iman</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+        {nilaiUtama.map((v, i) => (
+          <div class={`text-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md card-hover reveal delay-${(i+1)*100}`}>
+            <span class="text-4xl block mb-3" aria-hidden="true">{v.icon}</span>
+            <h4 class="font-display font-bold text-ink-900 mb-2">{v.title}</h4>
+            <p class="text-sm text-ink-800/55 leading-relaxed">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Fasilitas -->
+  <section class="py-20 bg-white" aria-labelledby="fasilitas-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 rounded-full border border-forest-100 mb-4">
+          Fasilitas
+        </span>
+        <h2 id="fasilitas-heading" class="font-display font-bold text-3xl text-ink-900">Sarana & Prasarana</h2>
+        <p class="text-ink-800/55 mt-2 text-sm">Fasilitas pendukung pembelajaran dan kehidupan santriwati sehari-hari</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+        {fasilitas.map((f, i) => (
+          <div class={`flex items-start gap-4 p-5 bg-parchment-100 rounded-xl hover:bg-forest-50 transition-colors reveal delay-${Math.min((i+1)*100, 500)}`}>
+            <span class="text-3xl flex-shrink-0" aria-hidden="true">{f.icon}</span>
+            <div>
+              <h4 class="font-semibold text-ink-900 text-sm mb-1">{f.nama}</h4>
+              <p class="text-xs text-ink-800/55 leading-relaxed">{f.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Bergabunglah dengan Keluarga PPTQ Nurul Iman"
+    subtitle="Jadikan putri Anda bagian dari generasi Qur'ani yang kami banggakan. Pendaftaran santriwati baru dibuka setiap tahun."
+    ctaLabel="Daftar Sekarang"
+    ctaHref={`${base}/pendaftaran`}
+    secondLabel="Hubungi Pengasuh"
+    secondHref="https://wa.me/6285887516141"
+  />
+</BaseLayout>

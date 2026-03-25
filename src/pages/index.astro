@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ProgramCard from '../components/ProgramCard.astro';
+import NewsCard from '../components/NewsCard.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
+import CTASection from '../components/CTASection.astro';
+import { getCollection } from 'astro:content';
+
+const base = '/pesantren-website';
+const allBerita = await getCollection('berita');
+const latestBerita = allBerita
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+
+const programs = [
+  { icon: '📖', title: "Tahfidz Al-Qur'an",     accent: 'forest',
+    description: "Program hafalan 30 juz dengan metode Yanbu'a, dibimbing ustadzah bersanad.",
+    features: ["Target 30 Juz dalam 3–4 tahun", "Evaluasi & muroja'ah rutin", "Sanad bersambung", "Sertifikat hafidz resmi"] },
+  { icon: '📚', title: 'Kajian Kitab Kuning',   accent: 'slate',
+    description: 'Mempelajari kitab-kitab klasik Islam dari sumber asli para ulama salafus shalih.',
+    features: ['Fiqih & Ushul Fiqih', 'Hadits & Tafsir', 'Nahwu, Sharaf & Balaghah', 'Akidah & Tasawuf'] },
+  { icon: '🎓', title: 'Madrasah Diniyah',      accent: 'teal',
+    description: 'Pendidikan agama Islam terstruktur mencakup semua aspek ilmu yang dibutuhkan santriwati.',
+    features: ['Jenjang Ula, Wustha, Ulya', 'Bahasa Arab aktif', 'Sejarah Islam', 'Praktik Ibadah'] },
+  { icon: '🌐', title: 'Bahasa & Keterampilan', accent: 'amber',
+    description: 'Pembekalan bahasa dan skill untuk menghadapi tantangan dunia modern.',
+    features: ['Bahasa Arab & Inggris', 'Literasi digital', 'Wirausaha Islami', 'Public speaking'] },
+];
+
+const activityImages = Array.from({ length: 6 }, (_, i) => ({
+  src: `${base}/images/students-activities/pesantren-kegiatan-santri-0${i + 1}.jpeg`,
+  alt: `Kegiatan santriwati PPTQ Nurul Iman ke-${i + 1}`,
+}));
+
+const galleryImages = Array.from({ length: 9 }, (_, i) => ({
+  src: `${base}/images/students-activities/pesantren-kegiatan-santri-${String(i + 1).padStart(2, '0')}.jpeg`,
+  alt: `Dokumentasi PPTQ Nurul Iman foto ke-${i + 1}`,
+}));
+
+const pillars = [
+  { icon: '🕌', num: '01', title: 'Aqidah Shahihah',    desc: 'Fondasi keimanan yang kuat sesuai manhaj Ahlus Sunnah wal Jamaah' },
+  { icon: '📖', num: '02', title: "Tahfidz Al-Qur'an",  desc: "Menghafal, memahami, dan mengamalkan Al-Qur'an dalam kehidupan" },
+  { icon: '🤝', num: '03', title: 'Akhlakul Karimah',   desc: 'Meneladani akhlak Rasulullah SAW dalam setiap aspek kehidupan' },
+  { icon: '🌱', num: '04', title: 'Khidmatul Ummah',    desc: 'Membentuk santriwati yang bermanfaat bagi keluarga, masyarakat dan bangsa' },
+];
+---
+
+<BaseLayout
+  title="Beranda"
+  description="Pondok Pesantren Tahfidzil Qur'an (PPTQ) Nurul Iman Ciomas Bogor — lembaga tahfidz Al-Qur'an khusus santriwati, mencetak generasi Qur'ani berakhlak mulia."
+  ogImage={`${base}/images/students-activities/pesantren-kegiatan-santri-01.jpeg`}
+>
+
+  <!-- ══ HERO ══ -->
+  <HeroSection
+    variant="full"
+    arabic="الَّذِينَ يَتْلُونَ كِتَابَ اللَّهِ وَأَقَامُوا الصَّلَاةَ"
+    title="PPTQ Nurul Iman"
+    subtitle="Lembaga Tahfidzil Qur'an di Ciomas, Bogor — mendidik santriwati menjadi hafidzah yang berakhlak mulia dan bermanfaat bagi umat."
+    ctaLabel="Daftar Santri Baru"
+    ctaHref={`${base}/pendaftaran`}
+    ctaSecondaryLabel="Profil Pesantren"
+    ctaSecondaryHref={`${base}/profil`}
+    bgImage={`${base}/images/students-activities/pesantren-kegiatan-santri-01.jpeg`}
+  />
+
+  <!-- ══ ABOUT — split editorial ══ -->
+  <section class="py-24 bg-parchment-100" aria-labelledby="about-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Images: stacked collage -->
+        <div class="reveal-left relative">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="col-span-2 img-zoom rounded-2xl overflow-hidden aspect-[16/9] shadow-xl">
+              <img src={`${base}/images/students-activities/pesantren-kegiatan-santri-02.jpeg`} alt="Suasana PPTQ Nurul Iman" class="w-full h-full object-cover" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/800x450/0d4429/fff?text=PPTQ'" />
+            </div>
+            {[3,4].map(n => (
+              <div class="img-zoom rounded-xl overflow-hidden aspect-square shadow-md">
+                <img src={`${base}/images/students-activities/pesantren-kegiatan-santri-0${n}.jpeg`} alt={`Kegiatan santri ${n}`} class="w-full h-full object-cover" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/400x400/0d4429/fff?text=PPTQ'" />
+              </div>
+            ))}
+          </div>
+          <!-- Floating badge -->
+          <div class="absolute -bottom-4 -right-4 bg-forest-900 text-white rounded-2xl px-5 py-4 shadow-2xl hidden sm:block">
+            <p class="font-display text-3xl text-amber-400">2006</p>
+            <p class="text-xs text-white/60 mt-0.5">Tahun Berdiri</p>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="reveal-right">
+          <span class="chip chip-forest mb-5">Tentang Kami</span>
+          <h2 id="about-heading" class="font-display text-4xl lg:text-5xl text-ink-900 mb-6 leading-[1.1]">
+            Rumah Para<br/>
+            <em class="not-italic text-forest-700">Pencinta Al-Qur'an</em>
+          </h2>
+          <p class="text-ink-800/65 leading-relaxed mb-4 text-base">
+            Pondok Pesantren Tahfidzil Qur'an (PPTQ) Nurul Iman berdiri di Kampung Cipayung, Desa Sukaharja, Kecamatan Ciomas, Kabupaten Bogor — berlokasi di kawasan asri kaki Gunung Salak yang kondusif untuk belajar dan beribadah.
+          </p>
+          <p class="text-ink-800/65 leading-relaxed mb-8 text-base">
+            Di bawah bimbingan <strong class="text-forest-800">Umi Hj. Eli HS, SQ</strong> bersama <strong class="text-forest-800">KH. Ubaidilah</strong> selaku Pimpinan, pesantren ini telah melahirkan banyak hafidzah yang tersebar di berbagai daerah Indonesia.
+          </p>
+
+          <!-- Key facts row -->
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            {[
+              { val: 'Santriwati', lbl: 'Khusus Putri' },
+              { val: 'Ciomas, Bogor', lbl: 'Lokasi Strategis' },
+              { val: 'Bersanad', lbl: 'Kualitas Hafalan' },
+              { val: 'Sejak 2006', lbl: 'Pengalaman' },
+            ].map(f => (
+              <div class="bg-white rounded-xl p-4 border border-parchment-300 shadow-sm">
+                <p class="font-display text-base text-forest-800">{f.val}</p>
+                <p class="text-2xs text-ink-800/45 uppercase tracking-wide mt-0.5">{f.lbl}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <a href={`${base}/profil`} class="inline-flex items-center gap-2 px-6 py-3 bg-forest-900 text-white font-semibold rounded-full hover:bg-forest-700 transition-all hover:scale-105 shadow-md text-sm">
+              Profil Lengkap
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href={`${base}/sejarah`} class="inline-flex items-center gap-2 px-6 py-3 border-2 border-forest-200 text-forest-800 font-semibold rounded-full hover:border-forest-400 hover:bg-forest-50 transition-all text-sm">
+              Sejarah Kami
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PILLARS — numbered list, editorial ══ -->
+  <section class="py-20 bg-forest-900 relative overflow-hidden" aria-labelledby="pillars-heading">
+    <div class="absolute inset-0 bg-pattern-star opacity-50 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-14 reveal">
+        <span class="chip chip-white mb-4">Nilai Inti</span>
+        <h2 id="pillars-heading" class="font-display text-4xl text-white">Empat Pilar Pendidikan</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {pillars.map((p, i) => (
+          <div class={`reveal delay-${i + 1} relative bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-7 transition-all duration-300 group`}>
+            <p class="font-display text-6xl text-white/8 absolute top-4 right-5 leading-none select-none">{p.num}</p>
+            <span class="text-3xl block mb-4" aria-hidden="true">{p.icon}</span>
+            <h3 class="font-display text-lg text-amber-400 mb-2">{p.title}</h3>
+            <p class="text-sm text-white/55 leading-relaxed">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROGRAMS ══ -->
+  <section class="py-24 bg-parchment-100" aria-labelledby="programs-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14 reveal">
+        <div>
+          <span class="chip chip-forest mb-4">Program Pendidikan</span>
+          <h2 id="programs-heading" class="font-display text-4xl text-ink-900">Program Unggulan Kami</h2>
+        </div>
+        <a href={`${base}/program-pendidikan`} class="text-sm font-bold text-forest-700 hover:text-forest-900 transition-colors flex items-center gap-1.5 group whitespace-nowrap">
+          Lihat Semua Program
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {programs.map((p, i) => (
+          <div class={`reveal delay-${i + 1}`}>
+            <ProgramCard {...p} href={`${base}/program-pendidikan`} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ACTIVITIES — full-bleed dark ══ -->
+  <section class="relative overflow-hidden" aria-labelledby="activities-heading">
+    <!-- Background photo -->
+    <div class="absolute inset-0">
+      <img src={`${base}/images/students-activities/pesantren-kegiatan-santri-07.jpeg`} alt="" class="w-full h-full object-cover" loading="lazy" aria-hidden="true" />
+      <div class="absolute inset-0 bg-forest-950/88"></div>
+    </div>
+    <div class="absolute inset-0 bg-pattern-dots opacity-30 pointer-events-none"></div>
+
+    <div class="relative z-10 py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 reveal">
+          <span class="chip chip-white mb-4">Kehidupan Santri</span>
+          <h2 id="activities-heading" class="font-display text-4xl text-white mb-3">Hari-Hari Penuh Berkah</h2>
+          <p class="text-white/55 max-w-lg mx-auto text-sm leading-relaxed">
+            Dari Qiyamul Lail sebelum subuh hingga belajar malam, setiap momen adalah kesempatan mendekat kepada Allah.
+          </p>
+        </div>
+        <GalleryGrid images={activityImages} columns={3} id="activities-home" />
+        <div class="text-center mt-10 reveal">
+          <a href={`${base}/kegiatan-santri`} class="inline-flex items-center gap-2 px-7 py-3.5 bg-amber-500 hover:bg-amber-400 text-white font-bold rounded-full shadow-gold transition-all hover:scale-105 text-sm">
+            Lihat Semua Kegiatan
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ GALLERY PREVIEW ══ -->
+  <section class="py-24 bg-white" aria-labelledby="gallery-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 reveal">
+        <div>
+          <span class="chip chip-forest mb-4">Galeri</span>
+          <h2 id="gallery-heading" class="font-display text-4xl text-ink-900">Momen Berharga</h2>
+        </div>
+        <a href={`${base}/galeri`} class="text-sm font-bold text-forest-700 hover:text-forest-900 transition-colors flex items-center gap-1.5 group whitespace-nowrap">
+          Semua Foto
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+      <GalleryGrid images={galleryImages} columns={3} id="gallery-home" />
+    </div>
+  </section>
+
+  <!-- ══ NEWS ══ -->
+  <section class="py-24 bg-parchment-100" aria-labelledby="news-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 reveal">
+        <div>
+          <span class="chip chip-forest mb-4">Berita Terkini</span>
+          <h2 id="news-heading" class="font-display text-4xl text-ink-900">Kabar dari Pesantren</h2>
+        </div>
+        <a href={`${base}/berita`} class="text-sm font-bold text-forest-700 hover:text-forest-900 transition-colors flex items-center gap-1.5 group whitespace-nowrap">
+          Semua Berita
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+        {latestBerita.map((post, i) => (
+          <div class={`reveal delay-${i + 1}`}>
+            <NewsCard title={post.data.title} date={post.data.date} image={post.data.image}
+              excerpt={post.data.excerpt} slug={post.slug} tags={post.data.tags} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA ══ -->
+  <CTASection
+    title="Daftarkan Putri Anda"
+    subtitle="Bergabunglah dengan keluarga besar PPTQ Nurul Iman dan jadikan Al-Qur'an sebagai cahaya kehidupan mereka. Pendaftaran dibuka setiap tahun."
+    ctaLabel="Daftar Sekarang"
+    ctaHref={`${base}/pendaftaran`}
+    secondLabel="Hubungi Pengasuh"
+    secondHref="https://wa.me/6285887516141"
+  />
+
+</BaseLayout>

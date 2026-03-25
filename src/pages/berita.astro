@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import NewsCard from '../components/NewsCard.astro';
+import { getCollection } from 'astro:content';
+
+const base = '/pesantren-website';
+const allBerita = await getCollection('berita');
+const sorted = allBerita.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+const featured = sorted[0];
+const rest     = sorted.slice(1);
+---
+
+<BaseLayout
+  title="Berita & Informasi"
+  description="Berita terkini, pengumuman, dan liputan kegiatan dari PPTQ Nurul Iman."
+  ogImage={featured?.data.image}
+>
+  <HeroSection
+    variant="page"
+    title="Berita & Informasi"
+    subtitle="Kabar terkini, pengumuman resmi, dan liputan kegiatan dari PPTQ Nurul Iman."
+    bgImage={`${base}/images/students-activities/pesantren-kegiatan-santri-10.jpeg`}
+    minHeight="min-h-[55vh]"
+  />
+
+  <section class="py-20 bg-white" aria-labelledby="berita-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 rounded-full border border-forest-100 mb-4">
+          Terkini
+        </span>
+        <h2 id="berita-heading" class="font-display font-bold text-4xl text-ink-900">Kabar dari Pesantren</h2>
+      </div>
+
+      {sorted.length > 0 ? (
+        <>
+          <!-- Featured post (largest card) -->
+          {featured && (
+            <div class="mb-14 reveal">
+              <article aria-label={`Berita unggulan: ${featured.data.title}`}>
+                <a
+                  href={`${base}/berita/${featured.slug}`}
+                  class="group grid grid-cols-1 lg:grid-cols-5 gap-0 bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-100"
+                >
+                  <!-- Image -->
+                  <div class="lg:col-span-3 img-zoom aspect-video lg:aspect-auto min-h-64">
+                    <img
+                      src={featured.data.image}
+                      alt={`Foto untuk berita: ${featured.data.title}`}
+                      class="w-full h-full object-cover"
+                      loading="eager"
+                      decoding="async"
+                      onerror="this.src='https://placehold.co/900x500/15803d/ffffff?text=PPTQ+News'"
+                    />
+                  </div>
+
+                  <!-- Content -->
+                  <div class="lg:col-span-2 p-8 lg:p-10 flex flex-col justify-center">
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span class="px-2 py-0.5 text-xs font-bold bg-amber-100 text-amber-700 rounded-full">⭐ Unggulan</span>
+                      {featured.data.tags?.slice(0, 2).map(tag => (
+                        <span class="px-2.5 py-0.5 text-xs font-semibold bg-forest-50 text-forest-700 rounded-full border border-forest-100">{tag}</span>
+                      ))}
+                    </div>
+
+                    <h2 class="font-display font-bold text-xl lg:text-2xl text-ink-900 group-hover:text-forest-700 transition-colors leading-snug mb-3">
+                      {featured.data.title}
+                    </h2>
+
+                    <div class="flex items-center gap-1.5 text-xs text-ink-800/40 mb-4">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                      </svg>
+                      <time datetime={new Date(featured.data.date).toISOString().split('T')[0]}>
+                        {new Date(featured.data.date).toLocaleDateString('id-ID', { year:'numeric', month:'long', day:'numeric' })}
+                      </time>
+                    </div>
+
+                    <p class="text-ink-800/55 leading-relaxed mb-6 line-clamp-3">{featured.data.excerpt}</p>
+
+                    <span class="inline-flex items-center gap-2 text-sm font-semibold text-forest-600 group-hover:gap-3 transition-all">
+                      Baca Selengkapnya
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </span>
+                  </div>
+                </a>
+              </article>
+            </div>
+          )}
+
+          <!-- Rest of posts grid -->
+          {rest.length > 0 && (
+            <div>
+              <h3 class="font-display font-semibold text-xl text-gray-700 mb-6 reveal">Berita Lainnya</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {rest.map((post, i) => (
+                  <div class="reveal" style={`transition-delay:${i * 0.1}s`}>
+                    <NewsCard
+                      title={post.data.title}
+                      date={post.data.date}
+                      image={post.data.image}
+                      excerpt={post.data.excerpt}
+                      slug={post.slug}
+                      tags={post.data.tags}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
+      ) : (
+        <div class="text-center py-20 reveal">
+          <p class="text-6xl mb-4">📰</p>
+          <p class="text-ink-800/55 text-lg">Belum ada berita yang diterbitkan.</p>
+          <p class="text-ink-800/40 text-sm mt-2">Silakan kembali lagi nanti.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

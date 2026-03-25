@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import Timeline from '../components/Timeline.astro';
+import CTASection from '../components/CTASection.astro';
+
+const base = '/pesantren-website';
+
+const timelineItems = [
+  {
+    year: '2006',
+    title: "Berdirinya PPTQ Nurul Iman",
+    description: "Atas izin Allah SWT dan tekad yang kuat, PPTQ Nurul Iman resmi berdiri di Kampung Cipayung, Desa Sukaharja, Kecamatan Ciomas, Kabupaten Bogor. Berawal dari halaqah kecil yang dipimpin langsung oleh pengasuh.",
+    highlight: true,
+  },
+  {
+    year: '2008',
+    title: 'Pembangunan Asrama Santri',
+    description: "Seiring bertambahnya santriwati yang datang dari berbagai daerah, dibangun asrama untuk menampung para penghafal Al-Qur'an yang ingin mondok secara penuh.",
+    highlight: false,
+  },
+  {
+    year: '2010',
+    title: 'Program Santriwati Resmi Berkembang',
+    description: "Di bawah bimbingan Umi Hj. Eli HS, SQ, program khusus santriwati resmi dibuka dengan asrama santriwati, merespons antusiasme tinggi dari keluarga yang ingin menitipkan putrinya.",
+    highlight: false,
+  },
+  {
+    year: '2012',
+    title: 'Wisuda Tahfidz Pertama',
+    description: "Momentum bersejarah: santriwati angkatan pertama berhasil menyelesaikan hafalan Al-Qur'an 30 juz dan diwisuda dalam upacara yang penuh haru dan keberkahan.",
+    highlight: true,
+  },
+  {
+    year: '2015',
+    title: "Pengembangan Program & Fasilitas",
+    description: "Pesantren terus berkembang dengan penambahan program kajian ilmu syar'i, pembangunan musholla yang lebih besar, dan peningkatan fasilitas asrama santriwati.",
+    highlight: false,
+  },
+  {
+    year: '2018',
+    title: 'Dikenal Lebih Luas',
+    description: "Kisah perjuangan dan dedikasi keluarga besar PPTQ Nurul Iman mendapat perhatian media, memperluas jangkauan pesantren ke santriwati dari berbagai wilayah Indonesia.",
+    highlight: false,
+  },
+  {
+    year: '2020',
+    title: 'Adaptasi di Masa Pandemi',
+    description: "Di tengah tantangan pandemi, PPTQ Nurul Iman tetap beroperasi dengan protokol kesehatan ketat, memastikan kegiatan tahfidz dan pendidikan santriwati tidak terhenti.",
+    highlight: false,
+  },
+  {
+    year: '2023',
+    title: 'Penguatan Sistem Pendidikan',
+    description: "Penguatan kurikulum tahfidz, pembinaan ustadzah, serta peningkatan metode pembelajaran untuk memastikan kualitas hafalan dan akhlak santriwati semakin baik.",
+    highlight: false,
+  },
+  {
+    year: '2025',
+    title: 'PPTQ Nurul Iman Hari Ini',
+    description: "Kini PPTQ Nurul Iman terus berkembang dengan santri aktif santriwati dari berbagai daerah, mengemban amanah untuk terus melahirkan generasi penghafal Al-Qur'an yang berakhlak mulia.",
+    highlight: true,
+  },
+];
+---
+
+<BaseLayout
+  title="Sejarah Pesantren"
+  description="Perjalanan panjang PPTQ Nurul Iman sejak berdiri tahun 2006 di Ciomas, Bogor hingga kini."
+  ogImage={`${base}/images/students-activities/pesantren-kegiatan-santri-04.jpeg`}
+>
+  <HeroSection
+    variant="page"
+    title="Sejarah Pesantren"
+    subtitle="Perjalanan hampir dua dekade PPTQ Nurul Iman dalam mendidik generasi penghafal Al-Qur'an di Ciomas, Bogor."
+    bgImage={`${base}/images/students-activities/pesantren-kegiatan-santri-04.jpeg`}
+    minHeight="min-h-[60vh]"
+  />
+
+  <!-- Intro -->
+  <section class="py-20 bg-white" aria-labelledby="sejarah-intro">
+    <div class="max-w-3xl mx-auto px-4 text-center reveal">
+      <span class="inline-block px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 rounded-full border border-forest-100 mb-6">
+        Perjalanan Kami
+      </span>
+      <h2 id="sejarah-intro" class="font-display font-bold text-4xl text-ink-900 mb-6">
+        Dari Halaqah Kecil<br/>Menuju Pesantren Berkah
+      </h2>
+      <p class="text-ink-800/70 leading-relaxed mb-4">
+        Setiap perjalanan besar dimulai dari langkah kecil yang penuh keikhlasan. Begitu pula PPTQ Nurul Iman, yang berawal dari tekad para pengasuh untuk menjaga dan menyebarkan kecintaan terhadap Al-Qur'an di tengah masyarakat Ciomas, Bogor.
+      </p>
+      <p class="text-ink-800/55 leading-relaxed">
+        Dengan izin Allah SWT, dukungan masyarakat, dan semangat para santriwati, pesantren ini terus tumbuh menjadi rumah bagi para pencinta Al-Qur'an dari berbagai penjuru Indonesia.
+      </p>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="py-20 bg-parchment-100" aria-labelledby="timeline-heading">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <h2 id="timeline-heading" class="font-display font-bold text-3xl text-ink-900">
+          Tonggak Perjalanan PPTQ Nurul Iman
+        </h2>
+        <p class="text-ink-800/55 mt-2 text-sm">2006 — Sekarang</p>
+      </div>
+      <Timeline items={timelineItems} />
+    </div>
+  </section>
+
+  <!-- Pendiri / Pengasuh highlight -->
+  <section class="py-20 bg-white" aria-labelledby="pendiri-heading">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-forest-800 to-forest-950 rounded-3xl overflow-hidden reveal">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <!-- Content -->
+          <div class="p-10 lg:p-14 flex flex-col justify-center">
+            <span class="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 rounded-full border border-amber-500/20 mb-5 w-fit">
+              Pengasuh Pesantren
+            </span>
+            <h3 class="font-display font-bold text-2xl text-white mb-1">Umi Hj. Eli HS, SQ</h3>
+            <p class="text-forest-300 text-sm mb-1">Ustadzah & Pengasuh Pondok Pesantren</p>
+            <p class="text-amber-400 text-sm mb-5">+62 858-8751-6141</p>
+
+            <h3 class="font-display font-bold text-xl text-white mb-1">KH. Ubaidilah</h3>
+            <p class="text-forest-300 text-sm mb-1">Pimpinan Pondok Pesantren</p>
+            <p class="text-amber-400 text-sm mb-6">+62 813-1703-0272</p>
+
+            <blockquote class="border-l-4 border-amber-500 pl-4">
+              <p class="font-arabic text-lg text-amber-400 mb-1" lang="ar">خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ</p>
+              <p class="text-xs text-forest-400">"Sebaik-baik kalian adalah yang mempelajari Al-Qur'an dan mengajarkannya." (HR. Bukhari)</p>
+            </blockquote>
+          </div>
+          <!-- Visual -->
+          <div class="bg-forest-700/30 flex items-center justify-center p-10 min-h-64">
+            <div class="text-center">
+              <div class="flex gap-4 justify-center mb-4">
+                <div class="w-20 h-20 rounded-full bg-gradient-to-br from-amber-400 to-gold-600 flex items-center justify-center text-2xl font-display font-bold text-white shadow-xl">E</div>
+                <div class="w-20 h-20 rounded-full bg-gradient-to-br from-forest-400 to-forest-600 flex items-center justify-center text-2xl font-display font-bold text-white shadow-xl">U</div>
+              </div>
+              <p class="text-forest-300 text-sm">Berdiri sejak <span class="text-amber-400 font-bold">2006</span></p>
+              <p class="text-forest-400 text-xs mt-1">Ciomas, Kabupaten Bogor</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Jadilah Bagian dari Sejarah PPTQ Nurul Iman"
+    subtitle="Setiap santriwati yang belajar di PPTQ Nurul Iman adalah bagian dari perjalanan panjang perjuangan menjaga Al-Qur'an."
+    ctaLabel="Daftar Sekarang"
+    ctaHref={`${base}/pendaftaran`}
+    secondLabel="Hubungi Kami"
+    secondHref={`${base}/kontak`}
+  />
+</BaseLayout>

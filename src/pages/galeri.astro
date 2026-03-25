@@ -1,0 +1,286 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
+
+const base = '/pesantren-website';
+
+// All 20 real student activity photos
+const allImages = Array.from({ length: 20 }, (_, i) => ({
+  src: `${base}/images/students-activities/pesantren-kegiatan-santri-${String(i + 1).padStart(2, '0')}.jpeg`,
+  alt: `Dokumentasi kegiatan santriwati PPTQ foto ke-${i + 1}`,
+  category: i < 8 ? 'kegiatan' : i < 13 ? 'belajar' : i < 17 ? 'ibadah' : 'fasilitas',
+}));
+
+const categories = [
+  { id: 'semua',     label: 'Semua Foto',      count: allImages.length },
+  { id: 'kegiatan',  label: 'Kegiatan Santri', count: allImages.filter(i => i.category === 'kegiatan').length },
+  { id: 'belajar',   label: 'Belajar & Ngaji', count: allImages.filter(i => i.category === 'belajar').length },
+  { id: 'ibadah',    label: 'Ibadah',          count: allImages.filter(i => i.category === 'ibadah').length },
+  { id: 'fasilitas', label: 'Fasilitas',       count: allImages.filter(i => i.category === 'fasilitas').length },
+];
+---
+
+<BaseLayout
+  title="Galeri Foto"
+  description="Galeri foto dokumentasi kegiatan santriwati dan kehidupan di PPTQ Nurul Iman. Lihat momen-momen berharga kehidupan pesantren."
+  ogImage={`${base}/images/students-activities/pesantren-kegiatan-santri-01.jpeg`}
+>
+  <HeroSection
+    variant="page"
+    title="Galeri Foto"
+    subtitle="Abadikan momen berharga kehidupan pesantren — dari kegiatan harian, belajar, ibadah, hingga fasilitas modern PPTQ."
+    bgImage={`${base}/images/students-activities/pesantren-kegiatan-santri-05.jpeg`}
+    minHeight="min-h-[55vh]"
+  />
+
+  <section class="py-20 bg-white" aria-labelledby="gallery-page-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-10 reveal">
+        <span class="inline-block px-4 py-1 text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 rounded-full border border-forest-100 mb-4">
+          Dokumentasi
+        </span>
+        <h2 id="gallery-page-heading" class="font-display font-bold text-3xl text-ink-900 mb-2">
+          Momen Kehidupan Pesantren
+        </h2>
+        <p class="text-ink-800/55 text-sm">{allImages.length} foto tersedia — klik foto untuk melihat penuh layar</p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div
+        class="flex flex-wrap gap-2 justify-center mb-10 reveal"
+        role="tablist"
+        aria-label="Filter kategori galeri"
+        id="gallery-filters"
+      >
+        {categories.map((cat, i) => (
+          <button
+            role="tab"
+            aria-selected={i === 0}
+            data-cat={cat.id}
+            class={`filter-tab px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border
+              ${i === 0
+                ? 'bg-forest-700 text-white border-forest-700 shadow-md'
+                : 'bg-white text-ink-800/70 border-gray-200 hover:border-forest-300 hover:text-forest-700'
+              }`}
+          >
+            {cat.label}
+            <span class={`ml-1.5 text-xs font-bold px-1.5 py-0.5 rounded-full ${i === 0 ? 'bg-white/20' : 'bg-gray-100'}`}>
+              {cat.count}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <!-- Gallery grid — all items rendered, JS shows/hides by category -->
+      <div id="gallery-wrapper">
+        <div
+          id="gallery-grid"
+          class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
+          role="list"
+          aria-label="Galeri foto pesantren"
+          aria-live="polite"
+        >
+          {allImages.map((img, i) => (
+            <div
+              role="listitem"
+              class="gallery-item-wrapper reveal"
+              data-category={img.category}
+              style={`transition-delay: ${Math.min(i * 0.04, 0.5)}s`}
+            >
+              <button
+                class="gallery-btn img-zoom w-full aspect-square rounded-xl overflow-hidden cursor-zoom-in relative group focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2"
+                data-index={i}
+                aria-label={img.alt}
+                type="button"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="this.src='https://placehold.co/400x400/15803d/ffffff?text=PPTQ'"
+                />
+                <div class="absolute inset-0 bg-forest-900/0 group-hover:bg-forest-900/35 transition-all duration-300 flex items-center justify-center" aria-hidden="true">
+                  <div class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 shadow-lg">
+                    <svg class="w-5 h-5 text-forest-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                    </svg>
+                  </div>
+                </div>
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <!-- Empty state -->
+        <div id="gallery-empty" class="hidden py-20 text-center">
+          <p class="text-4xl mb-3">📷</p>
+          <p class="text-ink-800/40">Tidak ada foto dalam kategori ini</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Full-screen Lightbox ── -->
+  <div
+    id="page-lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Tampilan foto penuh"
+    class="fixed inset-0 z-[200] hidden bg-black/96 backdrop-blur-sm"
+  >
+    <!-- Top bar -->
+    <div class="absolute top-0 left-0 right-0 flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/60 to-transparent z-10">
+      <span id="lb-counter" class="text-white/60 text-sm font-mono" aria-live="polite"></span>
+      <button id="lb-close" type="button" aria-label="Tutup (Esc)"
+        class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Image -->
+    <div class="flex items-center justify-center w-full h-full px-14 sm:px-20">
+      <img
+        id="lb-image"
+        src="" alt=""
+        class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl select-none transition-opacity duration-200"
+      />
+    </div>
+
+    <!-- Prev -->
+    <button id="lb-prev" type="button" aria-label="Foto sebelumnya (←)"
+      class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all hover:scale-110">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+
+    <!-- Next -->
+    <button id="lb-next" type="button" aria-label="Foto berikutnya (→)"
+      class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all hover:scale-110">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+
+    <!-- Caption -->
+    <div id="lb-caption" class="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/60 text-sm text-center max-w-lg px-4" aria-live="polite"></div>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ allImagesData: allImages }}>
+  // ── Category filter ──
+  const filterBtns = document.querySelectorAll('.filter-tab');
+  const items      = document.querySelectorAll('.gallery-item-wrapper');
+  const emptyState = document.getElementById('gallery-empty');
+
+  // Sync visible indices for lightbox
+  let visibleIndices = allImagesData.map((_, i) => i);
+  let lbPointer = 0; // index in visibleIndices
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+
+      // Update button styles
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-forest-700', 'text-white', 'border-forest-700', 'shadow-md');
+        b.classList.add('bg-white', 'text-ink-800/70', 'border-gray-200');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('bg-forest-700', 'text-white', 'border-forest-700', 'shadow-md');
+      btn.classList.remove('bg-white', 'text-ink-800/70', 'border-gray-200');
+      btn.setAttribute('aria-selected', 'true');
+
+      // Show/hide items
+      visibleIndices = [];
+      let shown = 0;
+      items.forEach((item, i) => {
+        const match = cat === 'semua' || item.dataset.category === cat;
+        item.style.display = match ? '' : 'none';
+        if (match) visibleIndices.push(i);
+        if (match) shown++;
+      });
+
+      emptyState?.classList.toggle('hidden', shown > 0);
+    });
+  });
+
+  // ── Lightbox ──
+  const lightbox = document.getElementById('page-lightbox');
+  const lbImage  = document.getElementById('lb-image');
+  const lbCounter= document.getElementById('lb-counter');
+  const lbCaption= document.getElementById('lb-caption');
+  const btnClose = document.getElementById('lb-close');
+  const btnPrev  = document.getElementById('lb-prev');
+  const btnNext  = document.getElementById('lb-next');
+
+  let isOpen = false;
+
+  function showLbImage(pointer) {
+    lbPointer = ((pointer % visibleIndices.length) + visibleIndices.length) % visibleIndices.length;
+    const realIdx = visibleIndices[lbPointer];
+    const img = allImagesData[realIdx];
+    if (lbImage) {
+      lbImage.style.opacity = '0';
+      setTimeout(() => {
+        lbImage.src = img.src;
+        lbImage.alt = img.alt;
+        lbImage.style.opacity = '1';
+      }, 100);
+    }
+    if (lbCounter) lbCounter.textContent = `${lbPointer + 1} / ${visibleIndices.length}`;
+    if (lbCaption) lbCaption.textContent = img.alt;
+  }
+
+  function openLightbox(realIndex) {
+    const pointer = visibleIndices.indexOf(realIndex);
+    if (pointer === -1) return;
+    isOpen = true;
+    lightbox?.classList.remove('hidden');
+    lightbox?.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    showLbImage(pointer);
+    btnClose?.focus();
+  }
+
+  function closeLightbox() {
+    isOpen = false;
+    lightbox?.classList.add('hidden');
+    lightbox?.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  // Attach to gallery buttons
+  document.querySelectorAll('.gallery-btn').forEach(btn => {
+    btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.index || '0')));
+  });
+
+  btnClose?.addEventListener('click', closeLightbox);
+  btnPrev?.addEventListener('click',  () => showLbImage(lbPointer - 1));
+  btnNext?.addEventListener('click',  () => showLbImage(lbPointer + 1));
+
+  lightbox?.addEventListener('click', e => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!isOpen) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  showLbImage(lbPointer - 1);
+    if (e.key === 'ArrowRight') showLbImage(lbPointer + 1);
+  });
+
+  // Touch swipe
+  let tx = 0;
+  lightbox?.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+  lightbox?.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) showLbImage(dx < 0 ? lbPointer + 1 : lbPointer - 1);
+  }, { passive: true });
+</script>

@@ -1,0 +1,116 @@
+---
+interface Props {
+  title:              string;
+  subtitle?:          string;
+  arabic?:            string;
+  ctaLabel?:          string;
+  ctaHref?:           string;
+  ctaSecondaryLabel?: string;
+  ctaSecondaryHref?:  string;
+  bgImage?:           string;
+  minHeight?:         string;
+  variant?:           'full' | 'page'; // full = homepage split, page = inner page banner
+}
+
+const {
+  title, subtitle, arabic, ctaLabel, ctaHref = '#',
+  ctaSecondaryLabel, ctaSecondaryHref = '#',
+  bgImage,
+  minHeight = 'min-h-screen',
+  variant   = 'page',
+} = Astro.props;
+---
+
+{variant === 'full' ? (
+  <!-- ── FULL Homepage Hero: editorial split layout ── -->
+  <section class={`relative ${minHeight} flex items-center overflow-hidden bg-forest-950`} aria-label="Banner utama">
+    <!-- Background photo (right 60%) -->
+    {bgImage && (
+      <div class="absolute inset-0 lg:left-[38%]">
+        <img src={bgImage} alt="Suasana pesantren" class="w-full h-full object-cover" loading="eager" decoding="async" />
+        <div class="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-950/80 to-forest-900/30"></div>
+      </div>
+    )}
+    <!-- Extra overlay -->
+    <div class="absolute inset-0 bg-pattern-dots opacity-40 pointer-events-none"></div>
+
+    <!-- Gold vertical accent line -->
+    <div class="absolute left-8 md:left-16 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-amber-500/60 to-transparent hidden lg:block"></div>
+
+    <!-- Content: left-aligned, max 48% width on large screens -->
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 py-32 lg:py-40">
+      <div class="lg:max-w-[46%]">
+        {arabic && (
+          <p class="hero-el-1 font-arabic text-xl sm:text-2xl text-amber-400 mb-6 leading-relaxed" lang="ar">{arabic}</p>
+        )}
+        <div class="hero-el-1 chip chip-white mb-5">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse-soft"></span>
+          Ciomas, Bogor
+        </div>
+        <h1 class="hero-el-2 font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.05] mb-6">
+          {title}
+        </h1>
+        {subtitle && (
+          <p class="hero-el-3 text-base sm:text-lg text-white/70 leading-relaxed mb-10 max-w-lg">{subtitle}</p>
+        )}
+        {(ctaLabel || ctaSecondaryLabel) && (
+          <div class="hero-el-4 flex flex-col sm:flex-row gap-3">
+            {ctaLabel && (
+              <a href={ctaHref} class="inline-flex items-center justify-center gap-2 px-7 py-4 bg-amber-500 hover:bg-amber-400 text-white font-bold rounded-full shadow-gold transition-all duration-300 hover:scale-105 text-sm">
+                {ctaLabel}
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </a>
+            )}
+            {ctaSecondaryLabel && (
+              <a href={ctaSecondaryHref} class="inline-flex items-center justify-center gap-2 px-7 py-4 bg-white/10 hover:bg-white/15 text-white font-medium rounded-full border border-white/25 backdrop-blur-sm transition-all text-sm">
+                {ctaSecondaryLabel}
+              </a>
+            )}
+          </div>
+        )}
+
+        <!-- Stats strip -->
+        <div class="hero-el-4 mt-14 pt-8 border-t border-white/10 grid grid-cols-3 gap-6">
+          {[['500+','Santri Aktif'],['2006','Tahun Berdiri'],['Khusus Santriwati','Program']].map(([val, lbl]) => (
+            <div>
+              <p class="font-display text-2xl sm:text-3xl text-amber-400">{val}</p>
+              <p class="text-xs text-white/50 mt-0.5">{lbl}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
+      <div class="w-6 h-9 rounded-full border-2 border-white/20 flex items-start justify-center pt-1.5">
+        <div class="w-1 h-2 rounded-full bg-white/50 animate-pulse-soft"></div>
+      </div>
+    </div>
+  </section>
+) : (
+  <!-- ── PAGE inner banner: full-bleed photo with bottom-anchored text ── -->
+  <section class={`relative ${minHeight} flex items-end overflow-hidden`} aria-label="Banner halaman">
+    {bgImage && (
+      <div class="absolute inset-0">
+        <img src={bgImage} alt="" class="w-full h-full object-cover" loading="eager" decoding="async" aria-hidden="true" />
+        <div class="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-900/50 to-forest-900/30"></div>
+      </div>
+    )}
+    <div class="absolute inset-0 bg-pattern-dots opacity-30 pointer-events-none"></div>
+
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 pt-36">
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 text-xs text-white/50 mb-4 hero-el-1">
+        <a href="/pesantren-website/" class="hover:text-white/80 transition-colors">Beranda</a>
+        <span>/</span>
+        <span class="text-white/80">{title}</span>
+      </div>
+      <h1 class="hero-el-2 font-display text-3xl sm:text-4xl lg:text-5xl text-white mb-4 leading-tight">{title}</h1>
+      {subtitle && <p class="hero-el-3 text-white/65 text-base max-w-2xl leading-relaxed">{subtitle}</p>}
+    </div>
+
+    <!-- Bottom gold accent -->
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent"></div>
+  </section>
+)}

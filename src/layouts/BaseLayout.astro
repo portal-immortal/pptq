@@ -1,0 +1,254 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title:       string;
+  description?: string;
+  ogImage?:    string;
+  ogType?:     string;
+}
+
+const {
+  title,
+  description = "Pondok Pesantren Tahfidzil Qur'an (PPTQ) Nurul Iman Ciomas Bogor — Lembaga tahfidz Al-Qur'an santriwati, mencetak generasi santriwati Qur'ani yang berakhlak mulia.",
+  ogImage = '/pesantren-website/images/students-activities/pesantren-kegiatan-santri-01.jpeg',
+  ogType  = 'website',
+} = Astro.props;
+
+const base        = '/pesantren-website';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com');
+const fullTitle   = `${title} — PPTQ Nurul Iman`;
+---
+
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Primary SEO -->
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta name="author"      content="PPTQ Nurul Iman" />
+  <meta name="keywords"    content="pesantren, tahfidz, quran, ciomas, bogor, hafidz, hafidzah, PPTQ, nurul iman, pondok pesantren" />
+  <link rel="canonical"    href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content={ogType} />
+  <meta property="og:url"         content={canonicalURL} />
+  <meta property="og:title"       content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height"content="630" />
+  <meta property="og:site_name"   content="PPTQ Nurul Iman" />
+  <meta property="og:locale"      content="id_ID" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={ogImage} />
+
+  <!-- Favicon -->
+  <link rel="icon"            type="image/svg+xml" href={`${base}/favicon.svg`} />
+  <link rel="apple-touch-icon"                     href={`${base}/favicon.svg`} />
+  <meta name="theme-color" content="#0d4429" />
+
+  <!-- Fonts: DM Serif Display + Plus Jakarta Sans + Amiri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+</head>
+
+<body class="font-body bg-parchment-100 text-ink-800 antialiased overflow-x-hidden">
+  <!-- Skip to content -->
+  <a href="#main-content"
+    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:bg-forest-900 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg">
+    Lewati ke konten
+  </a>
+
+  <Navbar />
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <Footer />
+
+  <!-- Back to top -->
+  <button
+    id="back-to-top"
+    aria-label="Kembali ke atas"
+    class="fixed bottom-6 right-6 z-40 w-12 h-12 bg-forest-900 hover:bg-forest-700 text-white rounded-full shadow-xl opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center group"
+  >
+    <svg class="w-5 h-5 transition-transform group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+    </svg>
+  </button>
+</body>
+</html>
+
+<style is:global>
+  /* ── CSS Variables ── */
+  :root {
+    --color-forest:    #0d4429;
+    --color-forest-lt: #255640;
+    --color-amber:     #c9963a;
+    --color-parchment: #faf7f0;
+    --color-ink:       #1a2332;
+    --font-display:    'DM Serif Display', Georgia, serif;
+    --font-body:       'Plus Jakarta Sans', system-ui, sans-serif;
+    --radius-card:     1.25rem;
+    --transition:      0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ── Base typography ── */
+  html { font-size: 16px; }
+  body { color: var(--color-ink); background: var(--color-parchment); }
+
+  h1,h2,h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  h4,h5,h6 { font-family: var(--font-body); font-weight: 700; }
+
+  /* ── Scroll reveal system ── */
+  .reveal, .reveal-left, .reveal-right, .reveal-scale {
+    opacity: 0;
+    will-change: opacity, transform;
+    transition: opacity 0.75s cubic-bezier(0.4,0,0.2,1),
+                transform 0.75s cubic-bezier(0.4,0,0.2,1);
+  }
+  .reveal       { transform: translateY(28px); }
+  .reveal-left  { transform: translateX(-28px); }
+  .reveal-right { transform: translateX(28px); }
+  .reveal-scale { transform: scale(0.94); }
+  .reveal.visible, .reveal-left.visible,
+  .reveal-right.visible, .reveal-scale.visible {
+    opacity: 1; transform: none;
+  }
+  .delay-1 { transition-delay: 0.10s; }
+  .delay-2 { transition-delay: 0.20s; }
+  .delay-3 { transition-delay: 0.30s; }
+  .delay-4 { transition-delay: 0.40s; }
+  .delay-5 { transition-delay: 0.50s; }
+
+  /* ── Hero entry animations ── */
+  @keyframes heroUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-el-1 { animation: heroUp 0.9s 0.1s both; }
+  .hero-el-2 { animation: heroUp 0.9s 0.3s both; }
+  .hero-el-3 { animation: heroUp 0.9s 0.5s both; }
+  .hero-el-4 { animation: heroUp 0.9s 0.7s both; }
+
+  /* ── Card interactions ── */
+  .card-lift {
+    transition: transform var(--transition), box-shadow var(--transition);
+    will-change: transform;
+  }
+  .card-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(13,68,41,0.14), 0 8px 20px rgba(13,68,41,0.08);
+  }
+
+  /* ── Image zoom ── */
+  .img-zoom { overflow: hidden; }
+  .img-zoom img {
+    transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    will-change: transform;
+  }
+  .img-zoom:hover img { transform: scale(1.06); }
+
+  /* ── Section divider (Islamic arch motif) ── */
+  .divider-arch {
+    position: relative;
+    overflow: hidden;
+  }
+  .divider-arch::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 60px;
+    background: var(--color-parchment);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  /* ── Badge chip ── */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.875rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 999px;
+  }
+  .chip-forest { background: #dcede3; color: var(--color-forest); border: 1px solid #b9dbc9; }
+  .chip-amber  { background: #fdf3e0; color: #a87830;             border: 1px solid #e8c97a; }
+  .chip-white  { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.25); }
+
+  /* ── Prose for berita ── */
+  .prose-rich h2 { font-family: var(--font-display); color: var(--color-forest); font-size: 1.5rem; margin: 2rem 0 0.75rem; }
+  .prose-rich h3 { font-family: var(--font-body); font-weight: 700; color: var(--color-forest-lt); margin: 1.5rem 0 0.5rem; }
+  .prose-rich p  { line-height: 1.9; margin-bottom: 1rem; color: #374151; }
+  .prose-rich ul { list-style: disc; padding-left: 1.5rem; }
+  .prose-rich li { margin-bottom: 0.4rem; line-height: 1.75; }
+  .prose-rich blockquote {
+    border-left: 3px solid var(--color-amber);
+    padding: 0.75rem 1rem;
+    background: #fdf3e0;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin: 1.5rem 0;
+  }
+
+  /* ── Focus styles ── */
+  *:focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ── Utilities ── */
+  .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
+  .focus\:not-sr-only:focus { position: fixed; width: auto; height: auto; }
+
+  /* ── Islamic ornamental border ── */
+  .border-ornament {
+    position: relative;
+  }
+  .border-ornament::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-amber), var(--color-forest), var(--color-amber), transparent);
+  }
+</style>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale')
+    .forEach(el => io.observe(el));
+
+  // Back to top
+  const btn = document.getElementById('back-to-top');
+  if (btn) {
+    window.addEventListener('scroll', () => {
+      const show = window.scrollY > 500;
+      btn.style.opacity = show ? '1' : '0';
+      btn.style.pointerEvents = show ? 'auto' : 'none';
+    }, { passive: true });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+</script>
