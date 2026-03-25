@@ -8,7 +8,7 @@ interface Props {
   tags?:   string[];
 }
 const { title, date, image, excerpt, slug, tags = [] } = Astro.props;
-const base = '';
+const base = '/pptq';
 const fmt = new Date(date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
