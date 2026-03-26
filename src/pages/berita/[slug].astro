@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const base = '/pptq';
+const base = '';
 
 const formattedDate = new Date(entry.data.date).toLocaleDateString('id-ID', {
   year: 'numeric', month: 'long', day: 'numeric',
