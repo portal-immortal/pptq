@@ -1,7 +1,7 @@
 ---
 title: "Marhaban Ya Ramadhan 1447H — PPTQ Nurul Iman Menyambut Bulan Suci"
 date: 2025-03-01
-image: "/pptq/images/latest-news/marhaban-ramadhan.jpeg"
+image: "/images/latest-news/marhaban-ramadhan.jpeg"
 excerpt: "PPTQ Nurul Iman dengan penuh suka cita menyambut datangnya bulan suci Ramadhan 1447H. Berbagai program istimewa telah disiapkan untuk memaksimalkan ibadah dan pembelajaran di bulan penuh berkah ini."
 author: "Admin Pesantren"
 tags: ["ramadhan", "program", "ibadah"]

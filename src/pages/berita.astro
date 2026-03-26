@@ -4,7 +4,7 @@ import HeroSection from '../components/HeroSection.astro';
 import NewsCard from '../components/NewsCard.astro';
 import { getCollection } from 'astro:content';
 
-const base = '/pptq';
+const base = '';
 const allBerita = await getCollection('berita');
 const sorted = allBerita.sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()

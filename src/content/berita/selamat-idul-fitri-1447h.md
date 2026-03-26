@@ -1,7 +1,7 @@
 ---
 title: "Selamat Hari Raya Idul Fitri 1447H / 2026M — PPTQ Nurul Iman"
 date: 2026-03-19
-image: "/pptq/images/latest-news/idul-fitri-1447h.jpg"
+image: "/images/latest-news/idul-fitri-1447h.jpg"
 excerpt: "Taqabbalallahu minna wa minkum. Minal Aidin Wal Faidzin, mohon maaf lahir dan batin. Keluarga besar PPTQ Nurul Iman Cipayung – Ciomas, Bogor mengucapkan Selamat Hari Raya Idul Fitri 1447H / 2026M."
 author: "Admin Pesantren"
 tags: ["idul fitri", "lebaran", "1447h"]
