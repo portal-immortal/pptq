@@ -26,12 +26,14 @@ const pengasuh = [
     jabatan: 'Ustadzah & Pengasuh Pondok Pesantren',
     wa: '6285887516141',
     inisial: 'E',
+    foto: 'umi Hj Eli .jpeg',
   },
   {
     nama: 'KH. Ubaidilah',
     jabatan: 'Pimpinan Pondok Pesantren',
     wa: '6281317030272',
     inisial: 'U',
+    foto: 'KH Ubaidilah.jpeg',
   },
 ];
 
@@ -174,8 +176,12 @@ const fasilitas = [
         {pengasuh.map((p, i) => (
           <div class={`reveal ${i === 0 ? 'delay-100' : 'delay-200'}`}>
             <div class="bg-gradient-to-br from-forest-800 to-forest-950 rounded-3xl p-8 text-white text-center card-hover">
-              <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-forest-500 to-forest-700 ring-4 ring-gold-500/40 flex items-center justify-center text-4xl font-display font-bold text-white mb-5 shadow-xl">
-                {p.inisial}
+              <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-forest-500 to-forest-700 ring-4 ring-gold-500/40 flex items-center justify-center text-4xl font-display font-bold text-white mb-5 shadow-xl overflow-hidden">
+                {p.foto ? (
+                  <img src={`/images/pengasuh-pimpinan/${p.foto}`} alt={p.nama} class="w-full h-full object-cover" />
+                ) : (
+                  p.inisial
+                )}
               </div>
               <h3 class="font-display font-bold text-xl text-white mb-1">{p.nama}</h3>
               <p class="text-forest-300 text-sm mb-5">{p.jabatan}</p>
