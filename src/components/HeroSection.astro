@@ -27,7 +27,7 @@ const {
     <!-- Background photo (right 60%) -->
     {bgImage && (
       <div class="absolute inset-0 lg:left-[38%]">
-        <img src={bgImage} alt="Suasana pesantren" class="w-full h-full object-cover" loading="eager" decoding="async" />
+        <img src={bgImage} alt="Suasana pesantren" class="w-full h-full object-cover" loading="eager" decoding="async" fetchpriority="high" />
         <div class="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-950/80 to-forest-900/30"></div>
       </div>
     )}
@@ -93,7 +93,7 @@ const {
   <section class={`relative ${minHeight} flex items-end overflow-hidden`} aria-label="Banner halaman">
     {bgImage && (
       <div class="absolute inset-0">
-        <img src={bgImage} alt="" class="w-full h-full object-cover" loading="eager" decoding="async" aria-hidden="true" />
+        <img src={bgImage} alt="" class="w-full h-full object-cover" loading="eager" decoding="async" fetchpriority="high" aria-hidden="true" />
         <div class="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-900/50 to-forest-900/30"></div>
       </div>
     )}
