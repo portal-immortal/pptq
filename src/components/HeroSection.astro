@@ -3,6 +3,7 @@ interface Props {
   title:              string;
   subtitle?:          string;
   arabic?:            string;
+  arabicImage?:        string;
   ctaLabel?:          string;
   ctaHref?:           string;
   ctaSecondaryLabel?: string;
@@ -13,7 +14,7 @@ interface Props {
 }
 
 const {
-  title, subtitle, arabic, ctaLabel, ctaHref = '#',
+  title, subtitle, arabic, arabicImage, ctaLabel, ctaHref = '#',
   ctaSecondaryLabel, ctaSecondaryHref = '#',
   bgImage,
   minHeight = 'min-h-screen',
@@ -40,7 +41,9 @@ const {
     <!-- Content: left-aligned, max 48% width on large screens -->
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 py-32 lg:py-40">
       <div class="lg:max-w-[46%]">
-        {arabic && (
+        {arabicImage ? (
+          <img src={arabicImage} alt={arabic ?? 'Kaligrafi Arab'} class="hero-el-1 mb-6 w-full max-w-[380px] h-auto object-contain object-left" loading="eager" decoding="async" />
+        ) : arabic && (
           <p class="hero-el-1 font-arabic text-xl sm:text-2xl text-amber-400 mb-6 leading-relaxed" lang="ar">{arabic}</p>
         )}
         <div class="hero-el-1 chip chip-white mb-5">
